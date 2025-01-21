@@ -1,0 +1,30 @@
+<service>
+  <!-- ID сервиса в системе -->
+  <id>singbox</id>
+  <!-- Отображаемое имя сервиса -->
+  <name>SingBox Proxy Service</name>
+  <description>This service runs SingBox proxy.</description>
+  
+  <!-- Путь к исполняемому файлу -->
+  <executable>%BASE%\sing-box.exe</executable>
+  <arguments>run -c %BASE%\config.json</arguments>
+  
+  <!-- Рабочая директория -->
+  <workingdirectory>%BASE%</workingdirectory>
+  
+  <!-- Настройки логирования -->
+  <log mode="roll-by-size">
+    <sizeThreshold>10240</sizeThreshold>
+    <keepFiles>8</keepFiles>
+  </log>
+  
+  <!-- Настройки перезапуска при сбоях -->
+  <onfailure action="restart" delay="10 sec"/>
+  <resetfailure>1 hour</resetfailure>
+  
+  <!-- Приоритет процесса -->
+  <priority>Normal</priority>
+  
+  <!-- Тайм-аут остановки службы -->
+  <stoptimeout>15 sec</stoptimeout>
+</service>
