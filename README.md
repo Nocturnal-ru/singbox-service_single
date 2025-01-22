@@ -24,7 +24,8 @@ VPN-Service-Sample/
 │   ├── config-tun.json             # Конфиг для режима TUN
 │   ├── config-proxy.json           # Конфиг для режима Proxy
 │   ├── sing-box.exe                # Исполняемый файл sing-box
-│   └── singbox-service.xml         # Конфигурация службы Windows
+│   |── singbox-service.xml         # Конфигурация WinSw службы
+|   |── singbox-service.exe         # Исполняемый файл WinSw для работы службы
 ├── install-service.bat             # Установка службы
 ├── uninstall-service.bat           # Удаление службы
 ├── start-service.bat               # Запуск службы
@@ -41,8 +42,11 @@ VPN-Service-Sample/
 1. Клонируйте репозиторий в удобное место на вашем компьютере. **ВАЖНО:** путь к папке проекта не должен содержать пробелов
 2. Выберите нужный режим работы с помощью `change-mode.bat`
 3. Настройте параметры подключения в `config-tun.json` и `config-proxy.json`. Для этого есть два способа:
-   - Экспортируйте конфигурацию из NekoBox и скопируйте из неё секцию outbounds
-   - Воспользуйтесь генератором конфигурации: [XKeen Config Generator](https://corvus-malus.github.io/XKeen-Config-Generator/)
+   - Переименуйте `config-tun.json.example` в `config-tun.json`
+   - Переименуйте `config-proxy.json.example` в `config-proxy.json`
+   - Удалите комментарии в конфигах
+   - Экспортируйте конфигурацию из NekoBox, либо воспользуйтесь генератором конфигурации: [XKeen Config Generator](https://corvus-malus.github.io/XKeen-Config-Generator/) и скопируйте конфигурацию вашего outbound в конфиги
+   - Обязательно сохраните теги "proxy" и "proxy-youtube" в конфигах как в примерах (они используются в правилах маршрутизации)
 4. Бесплатный VLESS можно получить тут: [Aeza VLESS Generator](https://github.com/vernette/aeza-vless-generator)
 5. Запустите `install-service.bat` от имени администратора для установки службы
 

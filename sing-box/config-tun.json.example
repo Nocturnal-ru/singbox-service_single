@@ -59,7 +59,7 @@
       // Либо воспользоваться https://corvus-malus.github.io/XKeen-Config-Generator/
       // Комментарии требуется удалить перед использованием
       "type": "vless",
-      "tag": "proxy",
+      "tag": "proxy", // Важно сохранить этот тег, он используется в правилах маршрутизации
       "server": "PROXY_SERVER_IP",
       "server_port": 443,
       "uuid": "YOUR_UUID",
@@ -83,7 +83,7 @@
       // Заполняется аналогично основному прокси
       // Комментарии требуется удалить перед использованием
       "type": "vless",
-      "tag": "proxy-youtube",
+      "tag": "proxy-youtube", // Важно сохранить этот тег, он используется в правилах маршрутизации
       "server": "YOUTUBE_PROXY_SERVER_IP",
       "server_port": 443,
       "uuid": "YOUR_YOUTUBE_UUID",
