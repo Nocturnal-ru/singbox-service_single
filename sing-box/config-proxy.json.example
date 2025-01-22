@@ -1,0 +1,204 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "warning",
+    "output": "box.log",
+    "timestamp": true
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "dns_proxy",
+        "address": "https://dns.google/dns-query",
+        "address_resolver": "dns_resolver",
+        "strategy": "ipv4_only",
+        "detour": "proxy"
+      },
+      {
+        "tag": "dns_resolver",
+        "address": "1.1.1.1",
+        "detour": "direct"
+      }
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "dns_resolver"
+      },
+      {
+        "rule_set": [
+          "geosite-discord",
+          "geosite-youtube",
+          "custom-rules",
+          "antizapret",
+          "geosite-tiktok"
+        ],
+        "server": "dns_proxy"
+      }
+    ],
+    "final": "dns_resolver"
+  },
+  "inbounds": [
+    {
+      "domain_strategy": "",
+      "listen": "127.0.0.1",
+      "listen_port": 2080,
+      "sniff": true,
+      "sniff_override_destination": false,
+      "tag": "mixed-in",
+      "type": "mixed"
+    }
+  ],
+  "outbounds": [
+    {
+      // Основной прокси-сервер
+      // Можно экспортировать конфигурацию из NekoBox и вытащить из него outbounds
+      // Либо воспользоваться https://corvus-malus.github.io/XKeen-Config-Generator/
+      // Комментарии требуется удалить перед использованием
+      "type": "vless",
+      "tag": "proxy",
+      "server": "PROXY_SERVER_IP",
+      "server_port": 443,
+      "uuid": "YOUR_UUID",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "reality": {
+          "enabled": true,
+          "public_key": "SERVER_PUBLIC_KEY",
+          "short_id": "SHORT_ID"
+        },
+        "server_name": "SERVER_NAME",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      // Дополнительный прокси для YouTube
+      // Заполняется аналогично основному прокси
+      // Комментарии требуется удалить перед использованием
+      "type": "vless",
+      "tag": "proxy-youtube",
+      "server": "YOUTUBE_PROXY_SERVER_IP",
+      "server_port": 443,
+      "uuid": "YOUR_YOUTUBE_UUID",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "reality": {
+          "enabled": true,
+          "public_key": "YOUTUBE_SERVER_PUBLIC_KEY",
+          "short_id": "YOUTUBE_SHORT_ID"
+        },
+        "server_name": "SERVER_NAME",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rule_set": [
+      {
+        "tag": "custom-rules",
+        "type": "local",
+        "format": "source",
+        "path": "rules/custom-rules.json"
+      },
+      {
+        "tag": "antizapret",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://github.com/savely-krasovsky/antizapret-sing-box/releases/latest/download/antizapret.srs",
+        "download_detour": "proxy"
+      },
+      {
+        "tag": "geosite-discord",
+        "type": "local",
+        "format": "binary",
+        "path": "rules/geosite-discord.srs"
+      },
+      {
+        "tag": "geosite-youtube",
+        "type": "local",
+        "format": "binary",
+        "path": "rules/geosite-youtube.srs"
+      },
+      {
+        "tag": "geosite-tiktok",
+        "type": "local",
+        "format": "binary",
+        "path": "rules/geosite-tiktok.srs"
+      },
+      {
+        "tag": "geoip-discord",
+        "type": "local",
+        "format": "binary",
+        "path": "rules/geoip-discord.srs"
+      },
+      {
+        "tag": "geosite-private",
+        "type": "local",
+        "format": "binary",
+        "path": "rules/geosite-private.srs"
+      },
+      {
+        "tag": "geoip-private",
+        "type": "local",
+        "format": "binary",
+        "path": "rules/geoip-private.srs"
+      }
+    ],
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "network": "udp",
+        "port": [443],
+        "outbound": "block"
+      },
+      {
+        "rule_set": ["geosite-youtube"],
+        "outbound": "proxy-youtube"
+      },
+      {
+        "rule_set": [
+          "geosite-discord",
+          "antizapret",
+          "geosite-tiktok",
+          "geoip-discord",
+          "custom-rules"
+        ],
+        "outbound": "proxy"
+      },
+      {
+        "rule_set": ["geosite-private", "geoip-private"],
+        "outbound": "direct"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "direct"
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true
+    }
+  }
+}

@@ -57,6 +57,7 @@
       // Основной прокси-сервер
       // Можно экспортировать конфигурацию из NekoBox и вытащить из него outbounds
       // Либо воспользоваться https://corvus-malus.github.io/XKeen-Config-Generator/
+      // Комментарии требуется удалить перед использованием
       "type": "vless",
       "tag": "proxy",
       "server": "PROXY_SERVER_IP",
@@ -80,6 +81,7 @@
     {
       // Дополнительный прокси для YouTube
       // Заполняется аналогично основному прокси
+      // Комментарии требуется удалить перед использованием
       "type": "vless",
       "tag": "proxy-youtube",
       "server": "YOUTUBE_PROXY_SERVER_IP",

@@ -7,7 +7,7 @@
   
   <!-- Путь к исполняемому файлу -->
   <executable>%BASE%\sing-box.exe</executable>
-  <arguments>run -c %BASE%\config.json</arguments>
+  <arguments>run -c %BASE%\config-proxy.json</arguments>
   
   <!-- Рабочая директория -->
   <workingdirectory>%BASE%</workingdirectory>
