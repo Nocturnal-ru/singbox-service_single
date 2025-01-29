@@ -1,4 +1,3 @@
-// save before delete sections geoip-private, geosite-private, quic block
 {
   "log": {
     "disabled": false,
@@ -10,14 +9,14 @@
     "servers": [
       {
         "tag": "dns_proxy",
-        "address": "https://dns.google/dns-query",
+        "address": "https://1.1.1.1/dns-query",
         "address_resolver": "dns_resolver",
         "strategy": "ipv4_only",
         "detour": "proxy"
       },
       {
         "tag": "dns_resolver",
-        "address": "1.1.1.1",
+        "address": "https://1.1.1.1/dns-query",
         "detour": "direct"
       }
     ],
@@ -39,7 +38,7 @@
   },
   "inbounds": [
     {
-      "domain_strategy": "",
+      "domain_strategy": "ipv4_only",
       "listen": "127.0.0.1",
       "listen_port": 2080,
       "sniff": true,
@@ -50,7 +49,6 @@
   ],
   "outbounds": [
     {
-      // Основной прокси-сервер
       // Можно экспортировать конфигурацию из NekoBox и вытащить из него outbounds
       // Либо воспользоваться https://corvus-malus.github.io/XKeen-Config-Generator/
       // Комментарии требуется удалить перед использованием
@@ -106,34 +104,14 @@
         "tag": "subnets",
         "type": "remote",
         "format": "source",
-        "path": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/subnets.json"
+        "url": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/subnets.json",
+        "download_detour": "proxy"
       },
-      {
-        "tag": "geosite-private",
-        "type": "local",
-        "format": "binary",
-        "path": "rules/geosite-private.srs"
-      },
-      {
-        "tag": "geoip-private",
-        "type": "local",
-        "format": "binary",
-        "path": "rules/geoip-private.srs"
-      }
     ],
     "rules": [
       {
         "protocol": "dns",
         "outbound": "dns-out"
-      },
-      {
-        "network": "udp",
-        "port": [443],
-        "outbound": "block"
-      },
-      {
-        "rule_set": ["geosite-youtube"],
-        "outbound": "proxy-youtube"
       },
       {
         "rule_set": [ 
@@ -143,13 +121,6 @@
         ],
         "outbound": "proxy"
       },
-      {
-        "rule_set": [
-          "geosite-private",
-          "geoip-private"
-        ],
-        "outbound": "direct"
-      }
     ],
     "auto_detect_interface": true,
     "final": "direct"
