@@ -1,3 +1,4 @@
+// save before delete sections geoip-private, geosite-private, quic block
 {
   "log": {
     "disabled": false,
