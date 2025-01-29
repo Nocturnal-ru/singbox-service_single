@@ -27,11 +27,9 @@
       },
       {
         "rule_set": [
-          "geosite-discord",
-          "geosite-youtube",
           "custom-rules",
-          "antizapret",
-          "geosite-tiktok"
+          "itdog-inside",
+          "subnets"
         ],
         "server": "dns_proxy"
       }
