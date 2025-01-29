@@ -76,30 +76,6 @@
       }
     },
     {
-      // Дополнительный прокси для YouTube
-      // Заполняется аналогично основному прокси
-      // Комментарии требуется удалить перед использованием
-      "type": "vless",
-      "tag": "proxy-youtube", // Важно сохранить этот тег, он используется в правилах маршрутизации
-      "server": "YOUTUBE_PROXY_SERVER_IP",
-      "server_port": 443,
-      "uuid": "YOUR_YOUTUBE_UUID",
-      "flow": "xtls-rprx-vision",
-      "tls": {
-        "enabled": true,
-        "reality": {
-          "enabled": true,
-          "public_key": "YOUTUBE_SERVER_PUBLIC_KEY",
-          "short_id": "YOUTUBE_SHORT_ID"
-        },
-        "server_name": "SERVER_NAME",
-        "utls": {
-          "enabled": true,
-          "fingerprint": "chrome"
-        }
-      }
-    },
-    {
       "type": "direct",
       "tag": "direct"
     },
@@ -119,12 +95,6 @@
         "type": "local",
         "format": "source",
         "path": "rules/custom-rules.json"
-      },
-      {
-        "tag": "no-russia-hosts",
-        "type": "local",
-        "format": "source",
-        "path": "rules/no-russia-hosts.json"
       },
       {
         "tag": "antizapret",
@@ -185,8 +155,7 @@
         "outbound": "proxy-youtube"
       },
       {
-        "rule_set": [
-          "no-russia-hosts",
+        "rule_set": [ 
           "geosite-discord",
           "antizapret",
           "geosite-tiktok",
@@ -196,7 +165,10 @@
         "outbound": "proxy"
       },
       {
-        "rule_set": ["geosite-private", "geoip-private"],
+        "rule_set": [
+          "geosite-private",
+          "geoip-private"
+        ],
         "outbound": "direct"
       }
     ],
