@@ -121,6 +121,12 @@
         "path": "rules/custom-rules.json"
       },
       {
+        "tag": "no-russia-hosts",
+        "type": "local",
+        "format": "source",
+        "path": "rules/no-russia-hosts.json"
+      },
+      {
         "tag": "antizapret",
         "type": "remote",
         "format": "binary",
@@ -180,6 +186,7 @@
       },
       {
         "rule_set": [
+          "no-russia-hosts",
           "geosite-discord",
           "antizapret",
           "geosite-tiktok",
