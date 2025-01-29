@@ -19,6 +19,7 @@ VPN-Service-Sample/
 ├── sing-box/                       # Основная директория
 │   ├── rules/                      # Правила маршрутизации
 │   │   ├── custom-rules.json       # Пользовательские правила
+|   │   ├── no-russia-hosts.json    # [Правила](https://github.com/dartraiden/no-russia-hosts) для хостов, ограничивающих/цензурирующих российский трафик (c моими правками)
 │   │   ├── geosite-*.srs           # Бинарные файлы правил для сайтов
 │   │   └── geoip-*.srs             # Бинарные файлы правил для IP
 │   ├── config-tun.json             # Конфиг для режима TUN
