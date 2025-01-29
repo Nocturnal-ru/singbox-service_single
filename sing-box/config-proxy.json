@@ -97,35 +97,17 @@
         "path": "rules/custom-rules.json"
       },
       {
-        "tag": "antizapret",
+        "tag": "itdog-inside",
         "type": "remote",
-        "format": "binary",
-        "url": "https://github.com/savely-krasovsky/antizapret-sing-box/releases/latest/download/antizapret.srs",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/inside-russia.json",
         "download_detour": "proxy"
       },
       {
-        "tag": "geosite-discord",
-        "type": "local",
-        "format": "binary",
-        "path": "rules/geosite-discord.srs"
-      },
-      {
-        "tag": "geosite-youtube",
-        "type": "local",
-        "format": "binary",
-        "path": "rules/geosite-youtube.srs"
-      },
-      {
-        "tag": "geosite-tiktok",
-        "type": "local",
-        "format": "binary",
-        "path": "rules/geosite-tiktok.srs"
-      },
-      {
-        "tag": "geoip-discord",
-        "type": "local",
-        "format": "binary",
-        "path": "rules/geoip-discord.srs"
+        "tag": "subnets",
+        "type": "remote",
+        "format": "source",
+        "path": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/subnets.json"
       },
       {
         "tag": "geosite-private",
@@ -156,11 +138,9 @@
       },
       {
         "rule_set": [ 
-          "geosite-discord",
-          "antizapret",
-          "geosite-tiktok",
-          "geoip-discord",
-          "custom-rules"
+          "custom-rules",
+          "itdog-inside",
+          "subnets"          
         ],
         "outbound": "proxy"
       },
