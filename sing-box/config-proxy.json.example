@@ -27,6 +27,7 @@
       },
       {
         "rule_set": [
+          "no-russia-hosts",
           "geosite-discord",
           "geosite-youtube",
           "custom-rules",
