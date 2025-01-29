@@ -1,4 +1,10 @@
-# Fork для личного пользования, с использованием 1го VPS и списков от itDog
+# Fork
+для личного пользования, с использованием одного VPS и списков от itDog
+- inside russia
+- subnets (Meta/Discord/Twitter)
+автообновляемые списки:
+https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/inside-russia.json
+https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/subnets.json
 
 # Singbox as service
 
