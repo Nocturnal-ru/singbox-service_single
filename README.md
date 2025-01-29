@@ -1,3 +1,5 @@
+# Fork для личного пользования, с использованием 1го VPS и списков от itDog
+
 # Singbox as service
 
 Проект для управления [sing-box](https://github.com/SagerNet/sing-box) как службой Windows с возможностью маршрутизации трафика по настраиваемым правилам.
