@@ -49,11 +49,8 @@
   ],
   "outbounds": [
     {
-      // Можно экспортировать конфигурацию из NekoBox и вытащить из него outbounds
-      // Либо воспользоваться https://corvus-malus.github.io/XKeen-Config-Generator/
-      // Комментарии требуется удалить перед использованием
       "type": "vless",
-      "tag": "proxy", // Важно сохранить этот тег, он используется в правилах маршрутизации
+      "tag": "proxy",
       "server": "PROXY_SERVER_IP",
       "server_port": 443,
       "uuid": "YOUR_UUID",
