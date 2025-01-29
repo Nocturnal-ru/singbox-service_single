@@ -2,9 +2,6 @@
   "version": 1,
   "rules": [
     {
-      "ip_cidr": []
-    },
-    {
       "domain_suffix": ["2ip.io"]
     }
   ]
