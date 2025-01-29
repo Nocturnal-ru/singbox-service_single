@@ -82,9 +82,10 @@
     "rule_set": [
       {
         "tag": "custom-rules",
-        "type": "local",
+        "type": "remote",
         "format": "source",
-        "path": "rules/custom-rules.json"
+        "path": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/custom-rules.json",
+        "download_detour": "proxy"
       },
       {
         "tag": "itdog-inside",
