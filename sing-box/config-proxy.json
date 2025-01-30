@@ -5,7 +5,7 @@
     "output": "box.log",
     "timestamp": true
   },
-  "dns": {
+"dns": {
     "servers": [
       {
         "tag": "dns_proxy",
@@ -19,7 +19,11 @@
         "address": "https://1.1.1.1/dns-query",
         "strategy": "ipv4_only",
         "detour": "direct"
-      }
+      },
+	  {
+        "tag": "refused-dns-server",
+        "address": "rcode://refused"
+		}
     ],
     "rules": [
       {
@@ -27,6 +31,12 @@
         "server": "dns_resolver"
       },
       {
+           "query_type": [
+                    "HTTPS"
+                ],
+                "server": "refused-dns-server"
+            },
+	  {
         "rule_set": [
           "custom-rules",
           "itdog-inside",
