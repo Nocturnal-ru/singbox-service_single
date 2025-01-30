@@ -88,7 +88,7 @@
         "tag": "custom-rules",
         "type": "remote",
         "format": "source",
-        "path": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/custom-rules.json",
+        "url": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/custom-rules.json",
         "download_detour": "proxy"
       },
       {
