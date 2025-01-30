@@ -31,10 +31,10 @@
         "server": "dns_resolver"
       },
       {
-           "query_type": [
-                    "HTTPS"
-                ],
-                "server": "refused-dns-server"
+	"query_type": [
+	"HTTPS"
+	],
+	"server": "refused-dns-server"
             },
 	  {
         "rule_set": [
