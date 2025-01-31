@@ -1,0 +1,154 @@
+{
+  "log": {
+    "disabled": false,
+    "level": "warning",
+    "output": "box.log",
+    "timestamp": true
+  },
+"dns": {
+    "servers": [
+      {
+        "tag": "dns_proxy",
+        "address": "https://1.1.1.1/dns-query",
+        "address_resolver": "dns_resolver",
+        "strategy": "ipv4_only",
+        "detour": "proxy"
+      },
+      {
+        "tag": "dns_resolver",
+        "address": "https://1.1.1.1/dns-query",
+        "strategy": "ipv4_only",
+        "detour": "direct"
+      },
+	  {
+        "tag": "refused-dns-server",
+        "address": "rcode://refused"
+		}
+    ],
+    "rules": [
+      {
+        "outbound": "any",
+        "server": "dns_resolver"
+      },
+      {
+	"query_type": [
+	"HTTPS"
+	],
+	"server": "refused-dns-server"
+            },
+	  {
+        "rule_set": [
+          "custom-rules",
+          "itdog-inside",
+          "subnets"
+        ],
+        "server": "dns_proxy"
+      }
+    ],
+    "final": "dns_resolver"
+  },
+"inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "address": ["172.16.0.1/30"],
+      "mtu": 1492,
+      "auto_route": true,
+      "strict_route": true,
+      "stack": "system",
+      "sniff": true,
+      "sniff_override_destination": true,
+      "domain_strategy": "ipv4_only"
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "vless",
+      "tag": "proxy",
+      "server": "PROXY_SERVER_IP",
+      "server_port": 443,
+      "uuid": "YOUR_UUID",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "reality": {
+          "enabled": true,
+          "public_key": "SERVER_PUBLIC_KEY",
+          "short_id": "SHORT_ID"
+        },
+        "server_name": "SERVER_NAME",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        }
+      }
+    },
+    {
+      "type": "direct",
+      "tag": "direct"
+    },
+    {
+      "type": "block",
+      "tag": "block"
+    },
+    {
+      "type": "dns",
+      "tag": "dns-out"
+    }
+  ],
+  "route": {
+    "rule_set": [
+      {
+        "tag": "custom-rules",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/custom-rules.json",
+        "download_detour": "proxy"
+      },
+      {
+        "tag": "itdog-inside",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/inside-russia.json",
+        "download_detour": "proxy"
+      },
+      {
+        "tag": "subnets",
+        "type": "remote",
+        "format": "source",
+        "url": "https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/subnets.json",
+        "download_detour": "proxy"
+      }
+    ],
+    "rules": [
+      {  
+	"protocol": ["stun"],
+	"outbound": "block"
+      },	
+      {
+        "protocol": "dns",
+        "outbound": "dns-out"
+      },
+      {
+        "network": ["tcp", "udp"],
+        "ip_version": 6,
+        "outbound": "block"
+      },
+      {
+        "rule_set": [ 
+          "custom-rules",
+          "itdog-inside",
+          "subnets"          
+        ],
+        "outbound": "proxy"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "direct"
+  },
+  "experimental": {
+    "cache_file": {
+      "enabled": true
+    }
+  }
+}
