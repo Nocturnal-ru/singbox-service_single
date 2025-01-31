@@ -8,6 +8,7 @@ https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/
 
 https://raw.githubusercontent.com/Nocturnal-ru/itdog-inside-russia-list-to-json/main/subnets.json
 
+использованные версии - SingBox 1.10.7, WinSW 2.12.0
 # Singbox as service
 
 Проект для управления [sing-box](https://github.com/SagerNet/sing-box) как службой Windows с возможностью маршрутизации трафика по настраиваемым правилам.
